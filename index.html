@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2048 Game</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="title-container">
+          <h1>2048</h1>
+          <img src="img/qr_code.webp" alt="QR Code" class="qr-code" />
+        </div>
+        <div class="score-container">
+          <div class="score-label">Score</div>
+          <div id="score">0</div>
+        </div>
+      </div>
+      <div id="game-board" class="game-board"></div>
+      <div class="instructions">
+        Use arrow keys to move tiles. Combine matching tiles to reach 2048!
+      </div>
+    </div>
+    <script src="game.js"></script>
+  </body>
+</html>
