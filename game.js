@@ -4,10 +4,15 @@ class Game2048 {
         this.score = 0;
         this.gameBoard = document.getElementById('game-board');
         this.scoreElement = document.getElementById('score');
+        this.gameOverModal = document.getElementById('game-over-modal');
+        this.finalScoreElement = document.getElementById('final-score');
+        this.restartButton = document.getElementById('restart-button');
         this.init();
     }
 
     init() {
+        this.board = Array(4).fill().map(() => Array(4).fill(0));
+        this.score = 0;
         this.addRandomTile();
         this.addRandomTile();
         this.renderBoard();
@@ -16,12 +21,19 @@ class Game2048 {
 
     setupEventListeners() {
         document.addEventListener('keydown', (e) => {
-            switch(e.key) {
-                case 'ArrowUp': this.move('up'); break;
-                case 'ArrowDown': this.move('down'); break;
-                case 'ArrowLeft': this.move('left'); break;
-                case 'ArrowRight': this.move('right'); break;
+            if (!this.gameOverModal.classList.contains('show')) {
+                switch(e.key) {
+                    case 'ArrowUp': this.move('up'); break;
+                    case 'ArrowDown': this.move('down'); break;
+                    case 'ArrowLeft': this.move('left'); break;
+                    case 'ArrowRight': this.move('right'); break;
+                }
             }
+        });
+
+        this.restartButton.addEventListener('click', () => {
+            this.gameOverModal.classList.remove('show');
+            this.init();
         });
     }
 
@@ -90,6 +102,11 @@ class Game2048 {
             this.addRandomTile();
             this.renderBoard();
             moved = true;
+
+            // Check for game over after each move
+            if (this.isGameOver()) {
+                this.showGameOver();
+            }
         }
 
         return moved;
@@ -159,6 +176,11 @@ class Game2048 {
             }
         }
         return true;
+    }
+
+    showGameOver() {
+        this.finalScoreElement.textContent = this.score;
+        this.gameOverModal.classList.add('show');
     }
 }
 

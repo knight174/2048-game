@@ -162,3 +162,55 @@ h1 {
     transform: scale(1);
   }
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background-color: #faf8ef;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  color: #776e65;
+  font-size: 32px;
+  margin: 0 0 20px 0;
+}
+
+.modal-content p {
+  color: #776e65;
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+#restart-button {
+  background-color: #8f7a66;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#restart-button:hover {
+  background-color: #7f6a56;
+}
