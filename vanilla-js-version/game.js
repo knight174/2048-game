@@ -184,7 +184,46 @@ class Game2048 {
     }
 }
 
-// Initialize the game when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    const game = new Game2048();
+// 触摸事件相关变量
+let touchStartX = 0;
+let touchStartY = 0;
+const SWIPE_THRESHOLD = 50;
+
+// 处理触摸开始事件
+function handleTouchStart(event) {
+  touchStartX = event.touches[0].clientX;
+  touchStartY = event.touches[0].clientY;
+}
+
+// 处理触摸结束事件
+function handleTouchEnd(event) {
+  if (game.gameOverModal.classList.contains('show')) return;
+
+  const deltaX = event.changedTouches[0].clientX - touchStartX;
+  const deltaY = event.changedTouches[0].clientY - touchStartY;
+
+  // 如果移动距离太小，不触发移动
+  if (Math.abs(deltaX) < SWIPE_THRESHOLD && Math.abs(deltaY) < SWIPE_THRESHOLD) return;
+
+  // 判断移动方向
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    // 水平移动
+    game.move(deltaX > 0 ? 'right' : 'left');
+  } else {
+    // 垂直移动
+    game.move(deltaY > 0 ? 'down' : 'up');
+  }
+}
+
+// 初始化游戏
+let game;
+
+// 添加触摸事件监听
+document.addEventListener('DOMContentLoaded', function() {
+  game = new Game2048();
+  
+  const gameBoard = document.getElementById('game-board');
+  gameBoard.addEventListener('touchstart', handleTouchStart, { passive: true });
+  gameBoard.addEventListener('touchend', handleTouchEnd, { passive: true });
+  gameBoard.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
 });
