@@ -7,10 +7,12 @@ const SWIPE_THRESHOLD = 50;
 
 export default function Game2048() {
   const [gameState, setGameState] = useState<GameState>({
-    board: Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill(0)),
+    board: Array(GRID_SIZE)
+      .fill(null)
+      .map(() => Array(GRID_SIZE).fill(0)),
     score: 0,
     gameOver: false,
-    won: false
+    won: false,
   });
 
   const touchStartRef = useRef<Position | null>(null);
@@ -21,14 +23,16 @@ export default function Game2048() {
   }, []);
 
   const initGame = () => {
-    const newBoard = Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill(0));
+    const newBoard = Array(GRID_SIZE)
+      .fill(null)
+      .map(() => Array(GRID_SIZE).fill(0));
     addNewTile(newBoard);
     addNewTile(newBoard);
     setGameState({
       board: newBoard,
       score: 0,
       gameOver: false,
-      won: false
+      won: false,
     });
   };
 
@@ -43,7 +47,8 @@ export default function Game2048() {
     }
 
     if (emptyCells.length > 0) {
-      const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+      const randomCell =
+        emptyCells[Math.floor(Math.random() * emptyCells.length)];
       board[randomCell.x][randomCell.y] = Math.random() < 0.9 ? 2 : 4;
     }
   };
@@ -57,7 +62,9 @@ export default function Game2048() {
 
     const rotateBoard = (times: number) => {
       for (let t = 0; t < times; t++) {
-        const rotated = Array(GRID_SIZE).fill(null).map(() => Array(GRID_SIZE).fill(0));
+        const rotated = Array(GRID_SIZE)
+          .fill(null)
+          .map(() => Array(GRID_SIZE).fill(0));
         for (let i = 0; i < GRID_SIZE; i++) {
           for (let j = 0; j < GRID_SIZE; j++) {
             rotated[j][GRID_SIZE - 1 - i] = newBoard[i][j];
@@ -71,7 +78,7 @@ export default function Game2048() {
 
     const moveLeft = () => {
       for (let i = 0; i < GRID_SIZE; i++) {
-        let row = newBoard[i].filter(cell => cell !== 0);
+        let row = newBoard[i].filter((cell: number) => cell !== 0);
         for (let j = 0; j < row.length - 1; j++) {
           if (row[j] === row[j + 1]) {
             row[j] *= 2;
@@ -79,11 +86,11 @@ export default function Game2048() {
             row[j + 1] = 0;
             moved = true;
             if (row[j] === 2048) {
-              setGameState(prev => ({ ...prev, won: true }));
+              setGameState((prev) => ({ ...prev, won: true }));
             }
           }
         }
-        row = row.filter(cell => cell !== 0);
+        row = row.filter((cell: number) => cell !== 0);
         while (row.length < GRID_SIZE) row.push(0);
         if (row.join(',') !== newBoard[i].join(',')) moved = true;
         newBoard[i] = row;
@@ -113,11 +120,11 @@ export default function Game2048() {
 
     if (moved) {
       addNewTile(newBoard);
-      setGameState(prev => ({
+      setGameState((prev) => ({
         ...prev,
         board: newBoard,
         score: newScore,
-        gameOver: isGameOver(newBoard)
+        gameOver: isGameOver(newBoard),
       }));
     }
   };
@@ -195,7 +202,11 @@ export default function Game2048() {
       <div className={styles.header}>
         <div className={styles.titleContainer}>
           <h1>2048</h1>
-          <img src="/qr_code.webp" alt="QR Code" className={styles.qrCode} />
+          <img
+            src={`${import.meta.env.BASE_URL}qr_code.webp`}
+            alt="QR Code"
+            className={styles.qrCode}
+          />
         </div>
         <div className={styles.scoreContainer}>
           <div className={styles.scoreLabel}>SCORE</div>
@@ -213,7 +224,9 @@ export default function Game2048() {
           row.map((cell, j) => (
             <div
               key={`${i}-${j}`}
-              className={`${styles.tile} ${cell > 0 ? styles[`tile-${cell}`] : ''}`}
+              className={`${styles.tile} ${
+                cell > 0 ? styles[`tile-${cell}`] : ''
+              }`}
             >
               {cell || ''}
             </div>
