@@ -70,7 +70,7 @@
   font-size: 40px;
   font-weight: bold;
   color: #776e65;
-  transition: all 0.2s ease-in-out;
+  transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out;
   width: 100%;
   height: 100%;
 }
@@ -123,18 +123,42 @@
   font-size: 30px;
 }
 
-.instructions {
-  margin-top: 20px;
-  color: #776e65;
+.scores {
+  display: flex;
+  gap: 10px;
+}
+
+.controls {
+  margin: 10px 0;
+}
+
+.newGameBtn {
+  background-color: #8f7a66;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 20px;
   font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.newGameBtn:hover {
+  background-color: #7f6a56;
+}
+
+.instructions {
+  margin: 15px 0;
+  color: #776e65;
+  font-size: 14px;
 }
 
 .modal {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -144,37 +168,25 @@
 
 .modalContent {
   background-color: #faf8ef;
-  padding: 30px;
-  border-radius: 10px;
+  padding: 20px;
+  border-radius: 5px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .modalContent h2 {
   color: #776e65;
-  font-size: 32px;
-  margin: 0 0 20px 0;
-}
-
-.modalContent p {
-  color: #776e65;
-  font-size: 20px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .modalContent button {
   background-color: #8f7a66;
   color: white;
   border: none;
-  padding: 10px 30px;
-  font-size: 18px;
-  border-radius: 5px;
+  border-radius: 3px;
+  padding: 10px 20px;
+  margin-top: 15px;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.modalContent button:hover {
-  background-color: #7f6a56;
 }
 
 /* 添加移动端适配样式 */
@@ -224,6 +236,26 @@
   .tile {
     font-size: calc(min(6vw, 24px));
     border-radius: 4px;
+  }
+
+  .scores {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .newGameBtn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .instructions {
+    font-size: 13px;
+    margin: 10px 0;
+  }
+
+  .modalContent {
+    margin: 0 20px;
+    padding: 15px;
   }
 }
 

@@ -3,7 +3,8 @@ import type { GameState, Direction, Position } from '../types/game';
 import styles from './Game2048.module.css';
 
 const GRID_SIZE = 4;
-const SWIPE_THRESHOLD = 50;
+const SWIPE_THRESHOLD = 30; // 降低滑动阈值，提高灵敏度
+const HIGH_SCORE_KEY = '2048_high_score';
 
 export default function Game2048() {
   const [gameState, setGameState] = useState<GameState>({
@@ -14,6 +15,9 @@ export default function Game2048() {
     gameOver: false,
     won: false,
   });
+  const [highScore, setHighScore] = useState<number>(() =>
+    parseInt(localStorage.getItem(HIGH_SCORE_KEY) || '0')
+  );
 
   const touchStartRef = useRef<Position | null>(null);
   const boardRef = useRef<HTMLDivElement>(null);
@@ -53,12 +57,10 @@ export default function Game2048() {
     }
   };
 
-  const move = (direction: Direction) => {
-    if (gameState.gameOver || gameState.won) return;
-
+  const moveBoard = (direction: Direction) => {
     const newBoard = JSON.parse(JSON.stringify(gameState.board));
     let moved = false;
-    let newScore = gameState.score;
+    let newScore = 0;
 
     const rotateBoard = (times: number) => {
       for (let t = 0; t < times; t++) {
@@ -118,14 +120,34 @@ export default function Game2048() {
         break;
     }
 
+    return { board: newBoard, score: newScore, moved };
+  };
+
+  const handleMove = (direction: Direction) => {
+    if (gameState.gameOver || gameState.won) return;
+
+    const { board: newBoard, score: newScore, moved } = moveBoard(direction);
     if (moved) {
+      // 添加触觉反馈
+      if ('vibrate' in navigator) {
+        navigator.vibrate(20);
+      }
+
       addNewTile(newBoard);
-      setGameState((prev) => ({
-        ...prev,
+      const newState = {
         board: newBoard,
-        score: newScore,
+        score: gameState.score + newScore,
         gameOver: isGameOver(newBoard),
-      }));
+        won: hasWon(newBoard),
+      };
+
+      // 更新最高分
+      if (newState.score > highScore) {
+        setHighScore(newState.score);
+        localStorage.setItem(HIGH_SCORE_KEY, newState.score.toString());
+      }
+
+      setGameState(newState);
     }
   };
 
@@ -152,19 +174,28 @@ export default function Game2048() {
     return true;
   };
 
+  const hasWon = (board: number[][]) => {
+    for (let i = 0; i < GRID_SIZE; i++) {
+      for (let j = 0; j < GRID_SIZE; j++) {
+        if (board[i][j] === 2048) return true;
+      }
+    }
+    return false;
+  };
+
   const handleKeyDown = (e: KeyboardEvent) => {
     switch (e.key) {
       case 'ArrowUp':
-        move('up');
+        handleMove('up');
         break;
       case 'ArrowDown':
-        move('down');
+        handleMove('down');
         break;
       case 'ArrowLeft':
-        move('left');
+        handleMove('left');
         break;
       case 'ArrowRight':
-        move('right');
+        handleMove('right');
         break;
     }
   };
@@ -190,9 +221,9 @@ export default function Game2048() {
 
     if (Math.max(absDeltaX, absDeltaY) > SWIPE_THRESHOLD) {
       if (absDeltaX > absDeltaY) {
-        move(deltaX > 0 ? 'right' : 'left');
+        handleMove(deltaX > 0 ? 'right' : 'left');
       } else {
-        move(deltaY > 0 ? 'down' : 'up');
+        handleMove(deltaY > 0 ? 'down' : 'up');
       }
     }
   };
@@ -208,10 +239,22 @@ export default function Game2048() {
             className={styles.qrCode}
           />
         </div>
-        <div className={styles.scoreContainer}>
-          <div className={styles.scoreLabel}>SCORE</div>
-          <div className={styles.score}>{gameState.score}</div>
+        <div className={styles.scores}>
+          <div className={styles.scoreContainer}>
+            <div className={styles.scoreLabel}>SCORE</div>
+            <div className={styles.score}>{gameState.score}</div>
+          </div>
+          <div className={styles.scoreContainer}>
+            <div className={styles.scoreLabel}>BEST</div>
+            <div className={styles.score}>{highScore}</div>
+          </div>
         </div>
+      </div>
+
+      <div className={styles.controls}>
+        <button onClick={initGame} className={styles.newGameBtn}>
+          New Game
+        </button>
       </div>
 
       <div
@@ -235,15 +278,16 @@ export default function Game2048() {
       </div>
 
       <div className={styles.instructions}>
-        <p>Use arrow keys or swipe to move the tiles</p>
+        <p>↑↓←→ 键盘方向键 或 滑动屏幕 移动方块</p>
       </div>
 
       {(gameState.gameOver || gameState.won) && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
-            <h2>{gameState.won ? 'You Won!' : 'Game Over!'}</h2>
-            <p>Score: {gameState.score}</p>
-            <button onClick={initGame}>Try Again</button>
+            <h2>{gameState.won ? '🎉 胜利！' : '💫 游戏结束'}</h2>
+            <p>得分: {gameState.score}</p>
+            <p>最高分: {highScore}</p>
+            <button onClick={initGame}>再来一局</button>
           </div>
         </div>
       )}
