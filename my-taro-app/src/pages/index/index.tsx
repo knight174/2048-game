@@ -1,5 +1,5 @@
 import { View } from "@tarojs/components";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AtButton } from "taro-ui";
 import { Header } from "../../components/Header";
 import { Board } from "../../components/Board";
@@ -8,6 +8,7 @@ import "./index.scss";
 
 export default function Index() {
   const { gameState, highScore, initGame, handleMove } = use2048Game();
+  const [showRules, setShowRules] = useState(false);
 
   useEffect(() => {
     initGame();
@@ -59,6 +60,33 @@ export default function Index() {
       />
 
       <View className='instructions'>滑动屏幕移动方块</View>
+
+      <View className='footer'>
+        <View onClick={() => setShowRules(true)}>游戏规则</View>
+      </View>
+
+      {showRules && (
+        <View className='modal'>
+          <View className='modal-content'>
+            <View className='modal-title'>🎮 游戏规则</View>
+            <View className='rules-content'>
+              <View>1. 使用键盘方向键或滑动屏幕来移动方块</View>
+              <View>2. 相同数字的方块相撞时会合并成为它们的和</View>
+              <View>3. 每次移动后，会在空白处随机出现一个 2 或 4</View>
+              <View>4. 当无法移动时游戏结束</View>
+              <View>5. 当出现 2048 时获得胜利</View>
+              <View>6. 挑战自己，获得更高分数！</View>
+            </View>
+            <AtButton
+              onClick={() => setShowRules(false)}
+              type='primary'
+              className='modal-button'
+            >
+              知道了
+            </AtButton>
+          </View>
+        </View>
+      )}
 
       {(gameState.gameOver || gameState.won) && (
         <View className='modal'>
