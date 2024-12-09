@@ -1,24 +1,18 @@
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+* {
   margin: 0;
-  background-color: #faf8ef;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+body {
+  height: 100vh;
+  padding: 10px;
+  background-color: #faf8ef;
 }
 
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 

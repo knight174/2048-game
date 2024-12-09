@@ -13,6 +13,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  margin-right: 15px;
 }
 
 .qrCode {
@@ -74,12 +75,28 @@
   height: 100%;
 }
 
-.tile-2 { background-color: #eee4da; }
-.tile-4 { background-color: #ede0c8; }
-.tile-8 { background-color: #f2b179; color: white; }
-.tile-16 { background-color: #f59563; color: white; }
-.tile-32 { background-color: #f67c5f; color: white; }
-.tile-64 { background-color: #f65e3b; color: white; }
+.tile-2 {
+  background-color: #eee4da;
+}
+.tile-4 {
+  background-color: #ede0c8;
+}
+.tile-8 {
+  background-color: #f2b179;
+  color: white;
+}
+.tile-16 {
+  background-color: #f59563;
+  color: white;
+}
+.tile-32 {
+  background-color: #f67c5f;
+  color: white;
+}
+.tile-64 {
+  background-color: #f65e3b;
+  color: white;
+}
 .tile-128 {
   background-color: #edcf72;
   color: white;
@@ -160,39 +177,76 @@
   background-color: #7f6a56;
 }
 
-@media (max-width: 600px) {
+/* 添加移动端适配样式 */
+@media screen and (max-width: 768px) {
   .container {
-    padding: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 10px;
+  }
+
+  .titleContainer {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
   }
 
   .container h1 {
-    font-size: 60px;
+    font-size: 42px;
+    margin: 0;
   }
 
   .qrCode {
-    height: 70px;
+    height: 50px;
+    margin: 0;
   }
 
   .gameBoard {
     width: 100%;
-    height: auto;
+    max-width: 350px;
+    margin: 0 auto;
     aspect-ratio: 1;
-    gap: 10px;
-    padding: 10px;
+    gap: 8px;
+    padding: 8px;
   }
 
   .tile {
-    font-size: 35px;
+    font-size: calc(min(6vw, 24px));
+    border-radius: 4px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .container {
+    padding: 5px;
   }
 
-  .tile-128,
-  .tile-256,
-  .tile-512 {
-    font-size: 30px;
+  .container h1 {
+    font-size: 36px;
   }
 
-  .tile-1024,
-  .tile-2048 {
-    font-size: 25px;
+  .qrCode {
+    height: 40px;
+  }
+
+  .gameBoard {
+    max-width: 280px;
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .scoreContainer {
+    padding: 6px 12px;
   }
 }
