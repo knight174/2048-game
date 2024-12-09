@@ -40,12 +40,14 @@ export default function Index() {
     }
   };
 
+  console.log("Game State:", gameState.gameOver, gameState.won);
+
   return (
-    <View className="index">
+    <View className='index'>
       <Header score={gameState.score} highScore={highScore} />
 
-      <View className="controls">
-        <AtButton onClick={initGame} type="primary">
+      <View className='controls'>
+        <AtButton onClick={initGame} type='primary'>
           新游戏
         </AtButton>
       </View>
@@ -56,17 +58,17 @@ export default function Index() {
         onTouchEnd={handleTouchEnd}
       />
 
-      <View className="instructions">滑动屏幕移动方块</View>
+      <View className='instructions'>滑动屏幕移动方块</View>
 
       {(gameState.gameOver || gameState.won) && (
-        <View className="modal">
-          <View className="modal-content">
-            <View className="modal-title">
+        <View className='modal'>
+          <View className='modal-content'>
+            <View className='modal-title'>
               {gameState.won ? "🎉 胜利!" : "💫 游戏结束"}
             </View>
             <View>得分: {gameState.score}</View>
             <View>最高分: {highScore}</View>
-            <AtButton onClick={initGame} type="primary">
+            <AtButton onClick={initGame} type='primary'>
               再来一局
             </AtButton>
           </View>

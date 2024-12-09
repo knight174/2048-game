@@ -103,25 +103,68 @@ export function use2048Game() {
     [gameState.board, gameState.score]
   );
 
+  const checkWin = useCallback((board: number[][]) => {
+    for (let i = 0; i < GRID_SIZE; i++) {
+      for (let j = 0; j < GRID_SIZE; j++) {
+        if (board[i][j] === 2048) return true;
+      }
+    }
+    return false;
+  }, []);
+
+  const isGameOver = useCallback((board: number[][]) => {
+    // 检查是否有空格
+    for (let i = 0; i < GRID_SIZE; i++) {
+      for (let j = 0; j < GRID_SIZE; j++) {
+        if (board[i][j] === 0) return false;
+      }
+    }
+
+    // 检查是否有可合并的相邻格子
+    for (let i = 0; i < GRID_SIZE; i++) {
+      for (let j = 0; j < GRID_SIZE; j++) {
+        // 检查右侧
+        if (j < GRID_SIZE - 1 && board[i][j] === board[i][j + 1]) return false;
+        // 检查下方
+        if (i < GRID_SIZE - 1 && board[i][j] === board[i + 1][j]) return false;
+      }
+    }
+
+    return true;
+  }, []);
+
   const handleMove = useCallback(
     (direction: Direction) => {
-      const { newBoard, moved, newScore } = moveBoard(direction);
+      if (gameState.gameOver || gameState.won) return;
 
+      const { newBoard, moved, newScore } = moveBoard(direction);
       if (moved) {
         addNewTile(newBoard);
+        const gameOver = isGameOver(newBoard);
+        const won = checkWin(newBoard);
+
         setGameState((prev) => ({
           ...prev,
           board: newBoard,
           score: newScore,
+          gameOver: gameOver,
+          won: won,
         }));
 
         if (newScore > highScore) {
           setHighScore(newScore);
           Taro.setStorageSync(HIGH_SCORE_KEY, newScore.toString());
         }
+
+        console.log("Game Status:", {
+          moved,
+          gameOver: gameOver,
+          won: won,
+          score: newScore,
+        });
       }
     },
-    [moveBoard, addNewTile, highScore]
+    [gameState, highScore, moveBoard, addNewTile, isGameOver, checkWin]
   );
 
   const initGame = useCallback(() => {
