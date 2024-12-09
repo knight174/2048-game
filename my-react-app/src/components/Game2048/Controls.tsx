@@ -8,7 +8,7 @@ export function Controls({ onNewGame }: ControlsProps) {
   return (
     <div className={styles.controls}>
       <button onClick={onNewGame} className={styles.newGameBtn}>
-        New Game
+        新 游 戏
       </button>
     </div>
   );
