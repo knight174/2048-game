@@ -1,40 +1,49 @@
 # 2048 Game
 
-English | [简体中文](./README.zh-CN.md)
+使用 React + TypeScript + Vite 构建的 2048 游戏。
 
-A smooth, animated implementation of the classic 2048 puzzle game using pure JavaScript, HTML, and CSS.
+## 🎮 在线体验
 
-## How to Play
+访问 [2048 Game](https://knight174.github.io/2048-game/) 即可开始游戏
 
-- Use arrow keys (↑, ↓, ←, →) to move tiles
-- Combine matching tiles to create larger numbers
-- Goal is to create a tile with the value 2048
-- Game continues after reaching 2048 for high score challenge
+## ✨ 特性
 
-## Features
+- 🎯 经典的 2048 游戏玩法
+- 📱 响应式设计，支持移动端
+- ⌨️ 支持键盘操作（↑↓←→）
+- 👆 支持触摸滑动
+- 🎯 分数统计
+- 🔄 随时开始新游戏
 
-- Responsive design
-- Smooth tile animations
-- Dynamic tile coloring
-- Score tracking
-- No external dependencies
+## 🚀 本地开发
 
-## Running the Game
+```bash
+# 克隆项目
+git clone https://github.com/knight174/2048-game.git
 
-Simply open `index.html` in a modern web browser.
+# 进入项目目录
+cd my-react-app
 
-## Game Rules
+# 安装依赖
+npm install
 
-1. Start with two tiles (2 or 4)
-2. Move all tiles in one of four directions
-3. Tiles with the same number merge when they collide
-4. After each move, a new tile (2 or 4) appears
-5. Game ends when no more moves are possible
+# 启动开发服务器
+npm run dev
 
-## Technologies
+# 构建生产版本
+npm run build
 
-- HTML5
-- CSS3
-- Vanilla JavaScript
+# 部署
+npm run deploy
+```
 
-## Enjoy the Game!
+## 🛠️ 技术栈
+
+- React 18
+- TypeScript
+- Vite
+- CSS Modules
+
+## 📝 License
+
+[MIT](LICENSE)
