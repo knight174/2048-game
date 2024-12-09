@@ -11,3 +11,9 @@ export interface GameState {
   gameOver: boolean;
   won: boolean;
 }
+
+export interface GameMove {
+  board: number[][];
+  score: number;
+  moved: boolean;
+}

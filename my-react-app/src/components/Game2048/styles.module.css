@@ -28,6 +28,11 @@
   margin: 0;
 }
 
+.scores {
+  display: flex;
+  gap: 10px;
+}
+
 .scoreContainer {
   background-color: #bbada0;
   color: white;
@@ -46,24 +51,42 @@
   font-weight: bold;
 }
 
+.controls {
+  margin: 10px 0;
+}
+
+.newGameBtn {
+  background-color: #8f7a66;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.newGameBtn:hover {
+  background-color: #7f6a56;
+}
+
 .gameBoard {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  gap: 15px;
+  gap: 10px;
+  padding: 10px;
   background-color: #bbada0;
   border-radius: 5px;
-  padding: 15px;
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  max-width: 500px;
   margin: 0 auto;
-  position: relative;
-  touch-action: none;
+  aspect-ratio: 1;
 }
 
 .tile {
   background-color: #cdc1b4;
-  border-radius: 5px;
+  border-radius: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,30 +146,6 @@
   font-size: 30px;
 }
 
-.scores {
-  display: flex;
-  gap: 10px;
-}
-
-.controls {
-  margin: 10px 0;
-}
-
-.newGameBtn {
-  background-color: #8f7a66;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.newGameBtn:hover {
-  background-color: #7f6a56;
-}
-
 .instructions {
   margin: 15px 0;
   color: #776e65;
@@ -189,7 +188,6 @@
   cursor: pointer;
 }
 
-/* 添加移动端适配样式 */
 @media screen and (max-width: 768px) {
   .container {
     overflow: hidden;
@@ -224,20 +222,6 @@
     margin: 0;
   }
 
-  .gameBoard {
-    width: 100%;
-    max-width: 350px;
-    margin: 0 auto;
-    aspect-ratio: 1;
-    gap: 8px;
-    padding: 8px;
-  }
-
-  .tile {
-    font-size: calc(min(6vw, 24px));
-    border-radius: 4px;
-  }
-
   .scores {
     justify-content: center;
     margin-top: 10px;
@@ -246,6 +230,19 @@
   .newGameBtn {
     padding: 8px 16px;
     font-size: 14px;
+  }
+
+  .gameBoard {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .tile {
+    font-size: calc(min(6vw, 24px));
+    border-radius: 4px;
   }
 
   .instructions {
