@@ -1,0 +1,22 @@
+.index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40rpx;
+  
+  .title {
+    font-size: 36rpx;
+    font-weight: bold;
+    margin-bottom: 40rpx;
+  }
+  
+  .button-group {
+    margin-top: 40rpx;
+    width: 100%;
+    
+    .at-button {
+      margin-bottom: 20rpx;
+    }
+  }
+}
