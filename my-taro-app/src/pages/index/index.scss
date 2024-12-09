@@ -1,22 +1,43 @@
 .index {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 40rpx;
-  
-  .title {
-    font-size: 36rpx;
-    font-weight: bold;
-    margin-bottom: 40rpx;
+  padding: 20px;
+
+  .controls {
+    margin: 20px 0;
   }
-  
-  .button-group {
-    margin-top: 40rpx;
-    width: 100%;
-    
-    .at-button {
-      margin-bottom: 20rpx;
+
+  .instructions {
+    margin: 20px 0;
+    color: #776e65;
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .modal-content {
+      background: #faf8ef;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+
+      .modal-title {
+        font-size: 36px;
+        color: #776e65;
+        margin-bottom: 30px;
+      }
+
+      .at-button {
+        margin-top: 30px;
+      }
     }
   }
 }

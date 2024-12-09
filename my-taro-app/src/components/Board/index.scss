@@ -1,0 +1,109 @@
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  background: #bbada0;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.tile {
+  background: #cdc1b4;
+  border-radius: 3px;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+
+  .tile-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    font-weight: bold;
+    color: #776e65;
+  }
+
+  &.tile-2 {
+    background: #eee4da;
+  }
+  &.tile-4 {
+    background: #ede0c8;
+  }
+  &.tile-8 {
+    background: #f2b179;
+    .tile-text {
+      color: #f9f6f2;
+    }
+  }
+  &.tile-16 {
+    background: #f59563;
+    .tile-text {
+      color: #f9f6f2;
+    }
+  }
+  &.tile-32 {
+    background: #f67c5f;
+    .tile-text {
+      color: #f9f6f2;
+      font-size: 32px;
+    }
+  }
+  &.tile-64 {
+    background: #f65e3b;
+    .tile-text {
+      color: #f9f6f2;
+      font-size: 32px;
+    }
+  }
+  &.tile-128 {
+    background: #edcf72;
+    .tile-text {
+      color: #f9f6f2;
+      font-size: 28px;
+    }
+  }
+  &.tile-256 {
+    background: #edcc61;
+    .tile-text {
+      color: #f9f6f2;
+      font-size: 28px;
+    }
+  }
+  &.tile-512 {
+    background: #edc850;
+    .tile-text {
+      color: #f9f6f2;
+      font-size: 28px;
+    }
+  }
+  &.tile-1024 {
+    background: #edc53f;
+    .tile-text {
+      color: #f9f6f2;
+      font-size: 24px;
+    }
+  }
+  &.tile-2048 {
+    background: #edc22e;
+    .tile-text {
+      color: #f9f6f2;
+      font-size: 24px;
+    }
+  }
+}
+
+// 适配小屏幕
+@media screen and (max-width: 375px) {
+  .game-board {
+    grid-gap: 8px;
+    padding: 8px;
+  }
+
+  .tile::after {
+    font-size: 28px;
+  }
+}

@@ -1,0 +1,64 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .title-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .title {
+    color: #776e65;
+    font-size: 80px;
+    font-weight: bold;
+  }
+
+  .scores {
+    display: flex;
+    gap: 10px;
+  }
+
+  .score-container {
+    background-color: #bbada0;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .score-label {
+    font-size: 26px;
+    text-transform: uppercase;
+  }
+
+  .score {
+    font-size: 48px;
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 20px;
+
+    .title {
+      font-size: 60px;
+    }
+
+    .score-container {
+      padding: 15px;
+    }
+
+    .score-label {
+      font-size: 24px;
+    }
+
+    .score {
+      font-size: 36px;
+    }
+  }
+}

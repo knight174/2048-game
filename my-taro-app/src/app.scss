@@ -1,0 +1,23 @@
+page {
+  background-color: #faf8ef;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+view {
+  box-sizing: border-box;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font: inherit;
+}
+
+.at-button {
+  margin: 0 15px;
+}
