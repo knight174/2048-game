@@ -1,48 +1,61 @@
 # 2048 Game
 
-使用 React + TypeScript + Vite 构建的 2048 游戏。
+English | [简体中文](./README.zh-CN.md)
 
-## 🎮 在线体验
+<h2 id="english">English</h2>
 
-访问 [2048 Game](https://knight174.github.io/2048-game/) 即可开始游戏
+A classic 2048 puzzle game with multiple implementations, featuring smooth animations and responsive design.
 
-## ✨ 特性
+## 🎮 Play Online
 
-- 🎯 经典的 2048 游戏玩法
-- 📱 响应式设计，支持移动端
-- ⌨️ 支持键盘操作（↑↓←→）
-- 👆 支持触摸滑动
-- 🎯 分数统计
-- 🔄 随时开始新游戏
+Visit [2048 Game](https://knight174.github.io/2048-game/) to start playing
 
-## 🚀 本地开发
+## ✨ Features
+
+- 🎯 Classic 2048 gameplay
+- 📱 Responsive design for mobile devices
+- ⌨️ Keyboard control support (↑↓←→)
+- 👆 Touch swipe support
+- 🎯 Score tracking
+- 🔄 New game at any time
+
+## 🚀 Development
 
 ```bash
-# 克隆项目
+# Clone the repository
 git clone https://github.com/knight174/2048-game.git
 
-# 进入项目目录
-cd my-react-app
+# Enter the project directory
+cd 2048-game
 
-# 安装依赖
+# Install dependencies
 npm install
 
-# 启动开发服务器
+# Start development server
 npm run dev
 
-# 构建生产版本
+# Build for production
 npm run build
-
-# 部署
-npm run deploy
 ```
 
-## 🛠️ 技术栈
+## 🛠️ Tech Stack
 
+### React Version
 - React 18
 - TypeScript
 - Vite
 - CSS Modules
+
+### Vue Version
+- Vue 3
+- TypeScript
+- Vite
+- Composition API
+
+### Vanilla JS Version
+- HTML5
+- CSS3
+- Pure JavaScript
 
 ## 📝 License
 
