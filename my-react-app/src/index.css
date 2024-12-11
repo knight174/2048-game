@@ -13,6 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body {
+  overscroll-behavior: none; /* 禁用滚动外溢行为 */
+  overflow: hidden;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
